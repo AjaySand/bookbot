@@ -1,4 +1,5 @@
 from stats import char_occurrences, get_num_words
+import sys
 
 def get_book_text(path):
     with open(path) as f:
@@ -7,7 +8,12 @@ def get_book_text(path):
     return file_contets;
 
 def main():
-    file_path = "books/frankenstein.txt"
+    if len(sys.argv) > 1:
+        file_path = sys.argv[1]
+    else:
+        print("Usage: python3 main.py <path_to_book>")
+        exit(1)
+
     print("============ BOOKBOT ============")
     print("Analyzing book found at " + file_path + "...")
     book_text = get_book_text(file_path)
@@ -22,6 +28,5 @@ def main():
     for char, count in occurences.items():
         if char.isalpha():
             print(f"{char}: {count}")
-
     print("============= END ===============")
 main()
